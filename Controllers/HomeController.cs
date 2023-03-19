@@ -1,6 +1,7 @@
 ﻿using E_comerce.Data;
 using E_comerce.Models;
 using E_comerce.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,10 @@ namespace E_comerce.Controllers
             return View(model);
         }
 
+
+
+
+        [Authorize(Roles =RUTAIMAGEN.admin)]
         public IActionResult MostrarPedidos()
         {
             PedidosViewModel detalles = new PedidosViewModel();
@@ -53,6 +58,9 @@ namespace E_comerce.Controllers
             return View(detalles);
         }
 
+
+        //Muestra el producto que el usuario desea comprar
+        [Authorize(Roles = RUTAIMAGEN.admin)]
         public IActionResult Comprar(int id)
         {
            
@@ -64,13 +72,19 @@ namespace E_comerce.Controllers
             return View(producto);
 
         }
-
+        //agregar ala base datos quien compro el producto y cual producto se compro con su precio 
 
         [HttpPost]
+        [Authorize(Roles = RUTAIMAGEN.admin)]
         public IActionResult Comprar(Productos productos)
         {
+
+            //identifica el usuario conectado
             var clain = (ClaimsIdentity)User.Identity;
             var claims = clain.FindFirst(ClaimTypes.NameIdentifier);
+
+
+            //guarda los datos
 
             Detalles ventas = new Detalles()
             {
@@ -85,6 +99,9 @@ namespace E_comerce.Controllers
 
         }
 
+
+        //Muestra  de la base datos quien compro el producto y cual producto se compro con su precio 
+        [Authorize(Roles = RUTAIMAGEN.admin)]
         public IActionResult VerCompras(string id)
         {
       
