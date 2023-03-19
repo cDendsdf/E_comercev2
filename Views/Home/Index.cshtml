@@ -1,0 +1,54 @@
+﻿@using E_comerce.Data;
+@using E_comerce.Models.ViewModels;
+@model HomeVM
+
+
+
+
+
+@*<a>
+    <img alt="" src="~/imagenes/Ecommerce-trends-van-2020.jpeg" width="1100" height="470" />
+</a>*@
+
+
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Nuevos Productos Disponibles</h1>
+   
+</div>
+
+
+
+<div class="container">
+
+
+    <div class="row">
+
+        
+        @foreach (var item in Model.productos)
+        {
+
+            <div class="card m-2" style="width: 18rem;">
+                <img src="@RUTAIMAGEN.RutaImagen@item.ImagenUrl" class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.NombreProducto</h5>
+                    <span>Precio: $@item.Precio </span>
+                    <p class="card-text">@item.Categoria.NombreCategoria</p>
+                    <p>@item.DescripcionCorta</p>
+                    <a class="btn btn-outline-primary">Comprar</a>
+                    
+                </div>
+                
+            </div>
+
+        }
+
+
+    </div>
+
+
+
+</div>
