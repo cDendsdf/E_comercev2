@@ -13,6 +13,8 @@ namespace E_comerce.Data
 
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Productos> Producto { get; set; }
-       
+        public DbSet<Detalles> Detalle { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+
     }
 }

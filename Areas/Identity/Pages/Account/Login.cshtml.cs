@@ -92,34 +92,7 @@ namespace E_comerce.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
 
-            if (!await _roleManager.RoleExistsAsync(RUTAIMAGEN.admin))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(RUTAIMAGEN.admin));
-                await _roleManager.CreateAsync(new IdentityRole(RUTAIMAGEN.user));
-            }
-
-            var UserEmail = "jadan@admin.com";
-            var Admin = await _userManager.FindByEmailAsync(UserEmail);
-
-
-            if (Admin == null)
-            {
-                Admin = new IdentityUser()
-                {
-                    Email = UserEmail,
-                    UserName = UserEmail
-                };
-
-
-                await _userManager.CreateAsync(Admin, "Jadan123*");
-            }
-
-
-            if (!await _userManager.IsInRoleAsync(Admin, RUTAIMAGEN.admin))
-            {
-                await _userManager.AddToRoleAsync(Admin, RUTAIMAGEN.admin);
-            }
-
+            
 
 
             if (!string.IsNullOrEmpty(ErrorMessage))

@@ -1,0 +1,54 @@
+﻿@using E_comerce.Data;
+@using E_comerce.Models.ViewModels;
+@model PedidosViewModel
+
+
+
+
+
+@*<a>
+    <img alt="" src="~/imagenes/Ecommerce-trends-van-2020.jpeg" width="1100" height="470" />
+</a>*@
+
+
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Nuevos Productos Disponibles</h1>
+
+</div>
+
+
+
+<div class="container">
+
+
+    <div class="row">
+
+
+        @foreach (var item in Model.Usuarios)
+        {
+
+            <div class="card m-2" style="width: 18rem;">
+                <h2>@item.UserName</h2>
+
+                <div class="card-body">
+                    <h5 class="card-title ">Lista De Compras</h5>
+                   
+                    
+                   
+                    <a class="btn btn-outline-primary " asp-action="VerCompras" asp-route-Id="@item.Id">Ver</a>
+
+                </div>
+
+            </div>
+
+        }
+
+
+    </div>
+
+
+
+</div>

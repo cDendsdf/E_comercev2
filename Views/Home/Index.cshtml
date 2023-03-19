@@ -38,7 +38,7 @@
                     <span>Precio: $@item.Precio </span>
                     <p class="card-text">@item.Categoria.NombreCategoria</p>
                     <p>@item.DescripcionCorta</p>
-                    <a class="btn btn-outline-primary">Comprar</a>
+                    <a class="btn btn-outline-primary " asp-action="Comprar" asp-route-id="@item.Id">Comprar</a>
                     
                 </div>
                 

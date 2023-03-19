@@ -21,7 +21,7 @@ namespace E_comerce.Models
         [Range(1, double.MaxValue, ErrorMessage = "El Precio debe de ser Mayor a cero")]
         public Decimal Precio { get; set; }
 
-
+        public int Existencia { get; set; }
         public string ImagenUrl { get; set; }
 
         // Foreign Key

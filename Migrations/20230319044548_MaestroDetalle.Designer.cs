@@ -4,6 +4,7 @@ using E_comerce.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecomerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230319044548_MaestroDetalle")]
+    partial class MaestroDetalle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,8 +58,6 @@ namespace Ecomerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductoId");
-
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Detalle");
@@ -94,9 +95,14 @@ namespace Ecomerce.Migrations
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("ProductoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
+
+                    b.HasIndex("ProductoId");
 
                     b.ToTable("Producto");
                 });
@@ -323,17 +329,9 @@ namespace Ecomerce.Migrations
 
             modelBuilder.Entity("E_comerce.Models.Detalles", b =>
                 {
-                    b.HasOne("E_comerce.Models.Productos", "Producto")
-                        .WithMany()
-                        .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("E_comerce.Models.Usuario", "usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Producto");
 
                     b.Navigation("usuario");
                 });
@@ -345,6 +343,10 @@ namespace Ecomerce.Migrations
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("E_comerce.Models.Detalles", null)
+                        .WithMany("Producto")
+                        .HasForeignKey("ProductoId");
 
                     b.Navigation("Categoria");
                 });
@@ -398,6 +400,11 @@ namespace Ecomerce.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("E_comerce.Models.Detalles", b =>
+                {
+                    b.Navigation("Producto");
                 });
 #pragma warning restore 612, 618
         }
